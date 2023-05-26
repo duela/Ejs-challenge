@@ -17,10 +17,19 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+//Use EJS to render parse paragraph element to home.ejs file
 app.get("/", function(req, res){
   // You can,t have more than one res.send at at time
   // res.send("Server is up and ruuning");
   res.render("home", {homeStartingContent: homeStartingContent});
+});
+//Use EJS to render parse about.ejs file to the server
+app.get('/about', function(req, res) {
+  res.render('about', {aboutContent: aboutContent});
+});
+//Use EJS to render parse contact.ejs file to the server
+app.get('/contact', function(req, res) {
+  res.render('contact', {contactContent: contactContent});
 });
 
 
