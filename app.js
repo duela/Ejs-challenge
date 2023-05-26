@@ -20,8 +20,9 @@ app.use(express.static("public"));
 app.get("/", function(req, res){
   // You can,t have more than one res.send at at time
   // res.send("Server is up and ruuning");
-  res.render("home");
+  res.render("home", {homeStartingContent: homeStartingContent});
 });
+
 
 
 
