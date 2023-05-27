@@ -3,7 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const _ = require("lodash");
+const _ = require("lodash"); // Use Lodash libaray to convert express route parameter value to lower case
 const port = 3000;
 const app = express();
 
@@ -46,27 +46,18 @@ app.post('/compose', function(req, res) {
   res.redirect('/');
 });
 
-// using express route parameters
-// app.get('/posts/:postName', function(req,res) {
-//   const requestedTitle = req.params.postName;
-// // To check if the value of the route parameter is equal to any titleText value
-//   if (composeTitleContainer.includes(requestedTitle)) {
-//     console.log("Match found!");
-//   }
-//   else {
-//     console.log("Not found!");
-//   }
-// });
-
-app.get('/posts/:postName', function(req,res) {
+app.get('/post/:postName', function(req,res) {
+  //Use Lodash libaray to convert express route parameter value to lower case
   var requestedTitle = _.lowerCase(req.params.postName);
-  var requestedTitleKebab = _.lowerCase([composeTitleContainer]);
-// To check if the value of the route parameter is equal to any titleText value
-  if (requestedTitleKebab.includes(requestedTitle)) {
-    console.log("Match found!");
-  }
-  else {
-    console.log("Not found!");
+  var postsChange = {
+    postT: composeTitleContainer, postP: composePostContainer}
+  for (var i = 0; i < postsChange.postT.length; i++) {
+    var requestedTitleKebab = _.lowerCase(postsChange.postT[i]);
+    if (requestedTitleKebab === requestedTitle ) {
+      res.render('post', {postTitle: postsChange.postT[i],
+           postPost: postsChange.postP[i]
+         });
+    }
   }
 });
 
