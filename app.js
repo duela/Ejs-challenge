@@ -13,6 +13,7 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 const composeTitleContainer = ["Home"];
 const composePostContainer = [homeStartingContent];
 
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,8 +21,7 @@ app.use(express.static("public"));
 
 //Use EJS to render parse paragraph element to home.ejs file
 app.get("/", function(req, res){
-  // You can,t have more than one res.send at at time
-  // res.send("Server is up and ruuning");
+  // use EJS to change values inside home.ejs homeTitle and homePost
   res.render("home", {homeTitle: composeTitleContainer, homePost: composePostContainer});
 });
 //Use EJS to render parse about.ejs file to the server
@@ -39,12 +39,36 @@ app.get('/compose', function(req, res) {
 
 //tap into the post req data in compose
 app.post('/compose', function(req, res) {
+  // Tpo push value from the name titletext and postText in compose.ejs into composeTitleContainer and composeTitleContainer array
   composeTitleContainer.push(req.body.titleText);
   composePostContainer.push(req.body.postText);
   res.redirect('/');
 });
 
+// using express route parameters
+app.get('/posts/:postName', function(req,res) {
+  const requestedTitle = req.params.postName;
+// To check if the value of the route parameter is equal to any titleText value
+  if (composeTitleContainer.includes(requestedTitle)) {
+    console.log("Match found!");
+  }
+  else {
+    console.log("Not found!");
+  }
+
+});
 
 app.listen(port, function() {
   console.log("Server started on port 3000");
 });
+
+
+
+
+// <%- include('partials/header'); -%>
+// <% homeTitle.forEach(function(home) { %>
+//   <h1><%= homeTitle %></h1>
+//   <p><%= homePost %></p>
+// <% }) %>
+//
+// <%- include('partials/footer'); -%>
