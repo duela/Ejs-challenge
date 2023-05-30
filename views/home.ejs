@@ -1,14 +1,8 @@
 <%- include('partials/header'); -%>
-<<<<<<< HEAD
-
-<%  for (var i = 0; i < homeTitle.length; i++) { %>
-  <h1><%= homeTitle[i] %></h1>
-  <p><%= homePost[i] %></p>
-<%  }  %>
-=======
+  <h1><%= homeTitleUnchanged %></h1>
+  <p><%= homePostUnchanged %></p>
 <% for (var i = 0; i < homeTitle.length; i++) { %>
   <h1><%= homeTitle[i] %></h1>
-  <p><%= homePost[i] %></p>
+  <p><%= homePost[i].substring(0, 99) + " ... " %><a href="/post/<%= homeTitle[i].toLowerCase() %>">Read More</a></p> 
 <% } %>
->>>>>>> improve
 <%- include('partials/footer'); -%>
