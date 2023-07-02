@@ -1,19 +1,10 @@
 <%- include('partials/header'); -%>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<%  for (var i = 0; i < homeTitle.length; i++) { %>
-  <h1><%= homeTitle[i] %></h1>
-  <p><%= homePost[i] %></p>
-<%  }  %>
-=======
-=======
-  <h1><%= homeTitleUnchanged %></h1>
+  <h1>Home</h1>
   <p><%= homePostUnchanged %></p>
->>>>>>> improve
+
 <% for (var i = 0; i < homeTitle.length; i++) { %>
-  <h1><%= homeTitle[i] %></h1>
-  <p><%= homePost[i].substring(0, 99) + " ... " %><a href="/post/<%= homeTitle[i].toLowerCase() %>">Read More</a></p> 
+  <h1><%= homeTitle[i].title %></h1>
+  <p><%= homeTitle[i].content.substring(0, 150) + " ... " %><a href="/post/<%= homeTitle[i]._id %>">Read More</a></p>
 <% } %>
->>>>>>> improve
+
 <%- include('partials/footer'); -%>
